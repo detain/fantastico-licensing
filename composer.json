@@ -15,6 +15,6 @@
         "ext-soap": "*"
     },
     "autoload": {
-        "classmap": ["class.fantastico.inc.php"]
+        "psr-4": {"detain\\myAdmin\\Fantastico\\": "src/"}
     }
 }
