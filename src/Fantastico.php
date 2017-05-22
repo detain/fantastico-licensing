@@ -10,6 +10,9 @@
 	 * @version $Id$
 	 * @access public
 	 */
+
+	namespace detain\Fantastico;
+
 	class Fantastico
 	{
 
