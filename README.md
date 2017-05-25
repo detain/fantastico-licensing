@@ -38,7 +38,7 @@ $fantastico = new Fantastico('API Username', 'API Password');
 
 ```php
 $details = $fantastico->getIpListDetailed(Fantastico::ALL_TYPES);
-```;
+```
 
 ***Note*** Returns an array of license entries, each entry being an array like 
 
