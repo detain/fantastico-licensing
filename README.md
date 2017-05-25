@@ -1,5 +1,19 @@
 # Fantastico Licensing API
 
+Class to itnerface with the Fantastico Licensing API to manage Fantastico Server and VPS License Types.  More info at https://www.netenberg.com/fantastico.php
+
+[![Latest Stable Version](https://poser.pugx.org/detain/fantastico/version)](https://packagist.org/packages/detain/fantastico)
+[![Total Downloads](https://poser.pugx.org/detain/fantastico/downloads)](https://packagist.org/packages/detain/fantastico)
+[![Latest Unstable Version](https://poser.pugx.org/detain/fantastico/v/unstable)](//packagist.org/packages/detain/fantastico)
+[![License](https://poser.pugx.org/detain/fantastico/license)](https://packagist.org/packages/detain/fantastico)
+[![Monthly Downloads](https://poser.pugx.org/detain/fantastico/d/monthly)](https://packagist.org/packages/detain/fantastico)
+[![Daily Downloads](https://poser.pugx.org/detain/fantastico/d/daily)](https://packagist.org/packages/detain/fantastico)
+[![Reference Status](https://www.versioneye.com/php/detain:fantastico/reference_badge.svg?style=flat)](https://www.versioneye.com/php/detain:fantastico/references)
+[![Build Status](https://travis-ci.org/detain/fantastico.svg?branch=master)](https://travis-ci.org/detain/fantastico)
+[![Code Climate](https://codeclimate.com/github/detain/fantastico/badges/gpa.svg)](https://codeclimate.com/github/detain/fantastico)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/detain/fantastico/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/detain/fantastico/?branch=master)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/226251fc068f4fd5b4b4ef9a40011d06)](https://www.codacy.com/app/detain/fantastico)
+
 ## Installation
 
 Install with composer like
