@@ -432,11 +432,16 @@ class Fantastico
 	 */
 	public function addIp($ip, $type) {
 		if (!$this->valid_ip($ip)) {
-			return array('faultcode' => 1, 'fault ' => 'Invalid IP Address ' . $ip);
+			$response = ['faultcode' => 1, 'fault' => 'Invalid IP Address ' . $ip];
+		} else {
+			$this->connect();
+			$response = $this->soapClient->addIp($this->getHash(), $ip, $type);
+			if (isset($response['fault '])) {
+				$response['fault'] = $response['fault '];
+				unset($response['fault ']);
+			}
 		}
-		$this->connect();
-		$response = $this->soapClient->addIp($this->getHash(), $ip, $type);
-		$this->cache = array();
+		$this->cache = [];
 		return $response;
 	}
 
