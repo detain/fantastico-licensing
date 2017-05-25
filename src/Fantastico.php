@@ -357,14 +357,18 @@ class Fantastico
 	 */
 	public function editIp($ip, $newip) {
 		if (!$this->valid_ip($ip)) {
-			return array('faultcode' => 1, 'fault ' => 'Invalid IP Address ' . $ip);
+			$response = ['faultcode' => 1, 'fault' => 'Invalid IP Address ' . $ip];
+		} elseif (!$this->valid_ip($newip)) {
+			$response = ['faultcode' => 2, 'fault' => 'Invalid IP Address ' . $newip];
+		} else {
+			$this->connect();
+			$response = $this->soapClient->editIp($this->getHash(), $ip, $newip);
+			if (isset($response['fault '])) {
+				$response['fault'] = $response['fault '];
+				unset($response['fault ']);
+			}
 		}
-		if (!$this->valid_ip($newip)) {
-			return array('faultcode' => 2, 'fault ' => 'Invalid IP Address ' . $newip);
-		}
-		$this->connect();
-		$response = $this->soapClient->editIp($this->getHash(), $ip, $newip);
-		$this->cache = array();
+		$this->cache = [];
 		return $response;
 	}
 
