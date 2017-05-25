@@ -10,11 +10,14 @@
             "homepage": "https://my.interserver.net/"
         }
     ],
+    "config": {
+        "minimum-stability": "dev"
+    },
     "require": {
         "php": ">=5.0.0",
         "ext-soap": "*"
     },
     "autoload": {
-        "psr-4": {"detain\\Fantastico\\": "src/"}
+        "psr-4": {"Detain\\Fantastico\\": "src/"}
     }
 }
