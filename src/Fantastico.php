@@ -157,7 +157,7 @@ class Fantastico
 			return false;
 		}
 		$this->connect();
-		$this->cache['getIpList_' . $type] = $this->soapClient->getIpList($this->getHash(), $type);
+		$this->cache['getIpList_' . $type] = json_decode($this->soapClient->getIpList($this->getHash(), $type), true);
 		return $this->cache['getIpList_' . $type];
 	}
 
