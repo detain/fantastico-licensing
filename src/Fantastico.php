@@ -158,6 +158,7 @@ class Fantastico
 		}
 		$this->connect();
 		$this->cache['getIpList_' . $type] = json_decode($this->soapClient->getIpList($this->getHash(), $type), true);
+		myadmin_log('fantastico', 'debug', json_encode($response), __LINE__, __FILE__);
 		return $this->cache['getIpList_' . $type];
 	}
 
@@ -212,6 +213,7 @@ class Fantastico
 		$this->connect();
 		//try {
 		$response = json_decode($this->soapClient->__soapCall('getIpListDetailed', array($this->getHash(), $type)), true);
+		myadmin_log('fantastico', 'debug', json_encode($response), __LINE__, __FILE__);
 		//echo '<pre>';echo print_r($response, true);echo '</pre>';
 		//$this->cache['getIpListDetailed_' . $type] = $this->cache['getIpListDetailed_' . $type]->Licenses;
 		$this->cache['getIpListDetailed_' . $type] = array();
@@ -285,7 +287,8 @@ class Fantastico
 			return $this->cache['getIpDetails_' . $ip];
 		}
 		$this->connect();
-		$this->cache['getIpDetails_' . $ip] = $this->soapClient->getIpDetails($this->getHash(), $ip);
+		$this->cache['getIpDetails_' . $ip] = json_decode($this->soapClient->getIpDetails($this->getHash(), $ip), true);
+		myadmin_log('fantastico', 'debug', json_encode($response), __LINE__, __FILE__);
 		return $this->cache['getIpDetails_' . $ip];
 	}
 
@@ -362,7 +365,8 @@ class Fantastico
 			$response = ['faultcode' => 2, 'fault' => 'Invalid IP Address ' . $newip];
 		} else {
 			$this->connect();
-			$response = $this->soapClient->editIp($this->getHash(), $ip, $newip);
+			$response = json_decode($this->soapClient->editIp($this->getHash(), $ip, $newip), true);
+			myadmin_log('fantastico', 'debug', json_encode($response), __LINE__, __FILE__);
 			if (isset($response['fault '])) {
 				$response['fault'] = $response['fault '];
 				unset($response['fault ']);
@@ -439,7 +443,8 @@ class Fantastico
 			$response = ['faultcode' => 1, 'fault' => 'Invalid IP Address ' . $ip];
 		} else {
 			$this->connect();
-			$response = $this->soapClient->addIp($this->getHash(), $ip, $type);
+			$response = json_decode($this->soapClient->addIp($this->getHash(), $ip, $type), true);
+			myadmin_log('fantastico', 'debug', json_encode($response), __LINE__, __FILE__);
 			if (isset($response['fault '])) {
 				$response['fault'] = $response['fault '];
 				unset($response['fault ']);
@@ -476,7 +481,8 @@ class Fantastico
 			return array('faultcode' => 1, 'fault ' => 'Invalid IP Address ' . $ip);
 		}
 		$this->connect();
-		$response = $this->soapClient->deactivateIp($this->getHash(), $ip);
+		$response = json_decode($this->soapClient->deactivateIp($this->getHash(), $ip), true);
+		myadmin_log('fantastico', 'debug', json_encode($response), __LINE__, __FILE__);
 		$this->cache = array();
 		return $response;
 
@@ -509,7 +515,8 @@ class Fantastico
 			return array('faultcode' => 1, 'fault ' => 'Invalid IP Address ' . $ip);
 		}
 		$this->connect();
-		$response = $this->soapClient->reactivateIp($this->getHash(), $ip);
+		$response = json_decode($this->soapClient->reactivateIp($this->getHash(), $ip), true);
+		myadmin_log('fantastico', 'debug', json_encode($response), __LINE__, __FILE__);
 		$this->cache = array();
 		return $response;
 
@@ -543,7 +550,8 @@ class Fantastico
 			return array('faultcode' => 1, 'fault ' => 'Invalid IP Address ' . $ip);
 		}
 		$this->connect();
-		$response = $this->soapClient->deleteIp($this->getHash(), $ip);
+		$response = json_decode($this->soapClient->deleteIp($this->getHash(), $ip), true);
+		myadmin_log('fantastico', 'debug', json_encode($response), __LINE__, __FILE__);
 		$this->cache = array();
 		return $response;
 	}
