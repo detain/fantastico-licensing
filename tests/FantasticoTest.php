@@ -14,7 +14,7 @@ class FantasticoTest extends TestCase {
 	 * This method is called before a test is executed.
 	 */
 	protected function setUp() {
-		$this->object = new Fantastico;
+		$this->object = new Fantastico(getenv('FANTASTICO_USERNAME'), getenv('FANTASTICO_PASSWORD'));
 	}
 
 	/**
