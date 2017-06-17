@@ -1,5 +1,6 @@
 <?php
 
+use Detain\Fantastico\Fantastico;
 use PHPUnit\Framework\TestCase;
 
 class FantasticoTest extends TestCase {
