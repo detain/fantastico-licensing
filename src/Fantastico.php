@@ -56,6 +56,8 @@ class Fantastico
 	 */
 	private $cache;
 
+
+
 	/**
 	 * this holds an array of possible license types you can use and there descriptions
 	 * note the ALL_TYPES is only for listing, you cant buy one thats all_types
@@ -66,11 +68,10 @@ class Fantastico
 		self::VPS_TYPES => 'VPS Licenses');
 
 	/**
-	 * Fantastico::__construct()
 	 * Starts an instance of the fantastico license API.
+	 *
 	 * @param string $username username to connect to fantastico api with
 	 * @param string $password password to connect to fantastico api with
-	 * @return \Fantastico
 	 */
 	public function __construct($username, $password) {
 		$this->cache = array();
@@ -90,14 +91,16 @@ class Fantastico
 			ini_set('soap.wsdl_cache_enabled', '0');
 			ini_set('max_execution_time', 1000);
 			ini_set('default_socket_timeout', 1000);
-			$this->soapClient = new \SoapClient($this->wsdl, array(
-
-				'soap_version' => SOAP_1_1,
-				'connection_timeout' => 1000,
-				'trace' => 1,
-				'exception' => 1));
-			//require_once (INCLUDE_ROOT . '/../vendor/detain/nusoap/lib/nusoap.php');
-			//$this->soapClient = new \nusoap_client($this->wsdl);
+			try {
+				$this->soapClient = new \SoapClient($this->wsdl, array(
+					'soap_version' => SOAP_1_1,
+					'connection_timeout' => 1000,
+					'trace' => 1,
+					'exception' => 1));
+			} catch (\Exception) {
+				require_once (INCLUDE_ROOT . '/../vendor/detain/nusoap/lib/nusoap.php');
+				$this->soapClient = new \nusoap_client($this->wsdl);
+			}
 		}
 	}
 
