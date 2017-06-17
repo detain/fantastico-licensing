@@ -161,7 +161,7 @@ class Fantastico {
 		}
 		$this->connect();
 		$this->cache['getIpList_'.$type] = json_decode($this->soapClient->getIpList($this->getHash(), $type), true);
-		myadmin_log('fantastico', 'debug', json_encode($response), __LINE__, __FILE__);
+		myadmin_log('fantastico', 'debug', json_encode($this->cache['getIpList_'.$type]), __LINE__, __FILE__);
 		return $this->cache['getIpList_'.$type];
 	}
 
@@ -291,7 +291,7 @@ class Fantastico {
 		}
 		$this->connect();
 		$this->cache['getIpDetails_'.$ip] = json_decode($this->soapClient->getIpDetails($this->getHash(), $ip), true);
-		myadmin_log('fantastico', 'debug', json_encode($response), __LINE__, __FILE__);
+		myadmin_log('fantastico', 'debug', json_encode($this->cache['getIpDetails_'.$ip]), __LINE__, __FILE__);
 		return $this->cache['getIpDetails_'.$ip];
 	}
 
@@ -457,6 +457,17 @@ class Fantastico {
 		return $response;
 	}
 
+	private function soap_ip_function($function, $ip) {
+		if (!$this->valid_ip($ip)) {
+			return array('faultcode' => 1, 'fault ' => 'Invalid IP Address '.$ip);
+		}
+		$this->connect();
+		$response = json_decode($this->soapClient->$function($this->getHash(), $ip), true);
+		myadmin_log('fantastico', 'debug', json_encode($response), __LINE__, __FILE__);
+		$this->cache = array();
+		return $response;
+	}
+
 	/**
 	 * deactivateIp()
 	 * Deactivates a Fantastico IP License
@@ -480,15 +491,7 @@ class Fantastico {
 	 * @return void
 	 */
 	public function deactivateIp($ip) {
-		if (!$this->valid_ip($ip)) {
-			return array('faultcode' => 1, 'fault ' => 'Invalid IP Address '.$ip);
-		}
-		$this->connect();
-		$response = json_decode($this->soapClient->deactivateIp($this->getHash(), $ip), true);
-		myadmin_log('fantastico', 'debug', json_encode($response), __LINE__, __FILE__);
-		$this->cache = array();
-		return $response;
-
+		return $this->soap_ip_function('deactivateIp', $ip);
 	}
 
 	/**
@@ -514,15 +517,7 @@ class Fantastico {
 	 * @return void
 	 */
 	public function reactivateIp($ip) {
-		if (!$this->valid_ip($ip)) {
-			return array('faultcode' => 1, 'fault ' => 'Invalid IP Address '.$ip);
-		}
-		$this->connect();
-		$response = json_decode($this->soapClient->reactivateIp($this->getHash(), $ip), true);
-		myadmin_log('fantastico', 'debug', json_encode($response), __LINE__, __FILE__);
-		$this->cache = array();
-		return $response;
-
+		return $this->soap_ip_function('reactivateIp', $ip);
 	}
 
 	/**
@@ -549,14 +544,7 @@ class Fantastico {
 	 * @return void
 	 */
 	public function deleteIp($ip) {
-		if (!$this->valid_ip($ip)) {
-			return array('faultcode' => 1, 'fault ' => 'Invalid IP Address '.$ip);
-		}
-		$this->connect();
-		$response = json_decode($this->soapClient->deleteIp($this->getHash(), $ip), true);
-		myadmin_log('fantastico', 'debug', json_encode($response), __LINE__, __FILE__);
-		$this->cache = array();
-		return $response;
+		return $this->soap_ip_function('deleteIp', $ip);
 	}
 
 }
