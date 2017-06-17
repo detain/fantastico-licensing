@@ -97,7 +97,7 @@ class Fantastico
 					'connection_timeout' => 1000,
 					'trace' => 1,
 					'exception' => 1));
-			} catch (\Exception) {
+			} catch (\Exception $e) {
 				require_once (INCLUDE_ROOT . '/../vendor/detain/nusoap/lib/nusoap.php');
 				$this->soapClient = new \nusoap_client($this->wsdl);
 			}
