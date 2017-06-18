@@ -457,7 +457,7 @@ class Fantastico {
 		return $response;
 	}
 
-	private function soap_ip_function($function, $ip) {
+	private function soapIpFunction($function, $ip) {
 		if (!$this->valid_ip($ip)) {
 			return array('faultcode' => 1, 'fault ' => 'Invalid IP Address '.$ip);
 		}
@@ -491,7 +491,7 @@ class Fantastico {
 	 * @return void
 	 */
 	public function deactivateIp($ip) {
-		return $this->soap_ip_function('deactivateIp', $ip);
+		return $this->soapIpFunction('deactivateIp', $ip);
 	}
 
 	/**
@@ -517,7 +517,7 @@ class Fantastico {
 	 * @return void
 	 */
 	public function reactivateIp($ip) {
-		return $this->soap_ip_function('reactivateIp', $ip);
+		return $this->soapIpFunction('reactivateIp', $ip);
 	}
 
 	/**
@@ -544,7 +544,7 @@ class Fantastico {
 	 * @return void
 	 */
 	public function deleteIp($ip) {
-		return $this->soap_ip_function('deleteIp', $ip);
+		return $this->soapIpFunction('deleteIp', $ip);
 	}
 
 }
