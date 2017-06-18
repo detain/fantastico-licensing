@@ -104,26 +104,26 @@ class Fantastico {
 	}
 
 	/**
-	 * Fantastico::get_ip_types()
+	 * Fantastico::getIpTypes()
 	 * returns an array of the possible license types in the format of
 	 *   ID => Description
 	 * where ID is the Type ID you need to pass to various functions asking for a license type
 	 *
 	 * @return array returns an array of possible license types and descriptions of them
 	 */
-	public function get_ip_types() {
+	public function getIpTypes() {
 		return $this->types;
 	}
 
 	/**
-	 * Fantastico::is_type()
+	 * Fantastico::isType()
 	 * a check to make sure the passed type is valid
 	 *
 	 * @param mixed the license type your trying to validate
 	 * @param integer $type
 	 * @return bool whether or not its a valid fantastico license type
 	 */
-	public function is_type($type) {
+	public function isType($type) {
 		return array_key_exists($type, $this->types);
 	}
 
@@ -156,7 +156,7 @@ class Fantastico {
 		if (isset($this->cache['getIpList_'.$type])) {
 			return $this->cache['getIpList_'.$type];
 		}
-		if (!$this->is_type($type)) {
+		if (!$this->isType($type)) {
 			return false;
 		}
 		$this->connect();
@@ -207,7 +207,7 @@ class Fantastico {
 	 * @return false|array returns false on error or an array of license details
 	 */
 	public function getIpListDetailed($type = self::ALL_TYPES) {
-		if (!$this->is_type($type)) {
+		if (!$this->isType($type)) {
 			return false;
 		}
 		if (isset($this->cache['getIpListDetailed_'.$type])) {

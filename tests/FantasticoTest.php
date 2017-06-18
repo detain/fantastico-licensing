@@ -36,7 +36,7 @@ class FantasticoTest extends TestCase {
 	}
 
 	/**
-	 * @covers Detain\Fantastico\Fantastico::get_ip_types
+	 * @covers Detain\Fantastico\Fantastico::getIpTypes
 	 * @todo   Implement testGet_ip_types().
 	 */
 	public function testGet_ip_types() {
@@ -47,7 +47,7 @@ class FantasticoTest extends TestCase {
 	}
 
 	/**
-	 * @covers Detain\Fantastico\Fantastico::is_type
+	 * @covers Detain\Fantastico\Fantastico::isType
 	 * @todo   Implement testIs_type().
 	 */
 	public function testIs_type() {
