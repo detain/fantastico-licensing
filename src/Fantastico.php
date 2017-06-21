@@ -250,11 +250,11 @@ class Fantastico {
 	 * Fantastico::valid_ip()
 	 * validates the IP address
 	 *
-	 * @param string $ip IP Address to validate
+	 * @param string $ipAddress IP Address to validate
 	 * @return bool whether or not the ip was validated
 	 */
-	public function valid_ip($ip) {
-		return ip2long($ip) !== false;
+	public function valid_ip($ipAddress) {
+		return ip2long($ipAddress) !== false;
 	}
 
 	/**
@@ -279,20 +279,20 @@ class Fantastico {
 	 *     [fault ]=> "The IP Address that you have specified does not exist."
 	 * )
 	 *
-	 * @param string $ip ip address to get details for
+	 * @param string $ipAddress ip address to get details for
 	 * @return mixed returns false on invalid IP, or an array of the details.
 	 */
-	public function getIpDetails($ip) {
-		if (!$this->valid_ip($ip)) {
-			return array('faultcode' => 1, 'fault ' => 'Invalid IP Address '.$ip);
+	public function getIpDetails($ipAddress) {
+		if (!$this->valid_ip($ipAddress)) {
+			return array('faultcode' => 1, 'fault ' => 'Invalid IP Address '.$ipAddress);
 		}
-		if (isset($this->cache['getIpDetails_'.$ip])) {
-			return $this->cache['getIpDetails_'.$ip];
+		if (isset($this->cache['getIpDetails_'.$ipAddress])) {
+			return $this->cache['getIpDetails_'.$ipAddress];
 		}
 		$this->connect();
-		$this->cache['getIpDetails_'.$ip] = json_decode($this->soapClient->getIpDetails($this->getHash(), $ip), true);
-		myadmin_log('fantastico', 'debug', json_encode($this->cache['getIpDetails_'.$ip]), __LINE__, __FILE__);
-		return $this->cache['getIpDetails_'.$ip];
+		$this->cache['getIpDetails_'.$ipAddress] = json_decode($this->soapClient->getIpDetails($this->getHash(), $ipAddress), true);
+		myadmin_log('fantastico', 'debug', json_encode($this->cache['getIpDetails_'.$ipAddress]), __LINE__, __FILE__);
+		return $this->cache['getIpDetails_'.$ipAddress];
 	}
 
 	/**
@@ -357,18 +357,18 @@ class Fantastico {
 	 * )
 	 *
 	 *
-	 * @param mixed $ip old ip address currently licensed
+	 * @param mixed $ipAddress old ip address currently licensed
 	 * @param mixed $newip new ip address to change i tot
 	 * @return array returns an array of ip and newip or a fault and faultcode
 	 */
-	public function editIp($ip, $newip) {
-		if (!$this->valid_ip($ip)) {
-			$response = ['faultcode' => 1, 'fault' => 'Invalid IP Address '.$ip];
+	public function editIp($ipAddress, $newip) {
+		if (!$this->valid_ip($ipAddress)) {
+			$response = ['faultcode' => 1, 'fault' => 'Invalid IP Address '.$ipAddress];
 		} elseif (!$this->valid_ip($newip)) {
 			$response = ['faultcode' => 2, 'fault' => 'Invalid IP Address '.$newip];
 		} else {
 			$this->connect();
-			$response = json_decode($this->soapClient->editIp($this->getHash(), $ip, $newip), true);
+			$response = json_decode($this->soapClient->editIp($this->getHash(), $ipAddress, $newip), true);
 			myadmin_log('fantastico', 'debug', json_encode($response), __LINE__, __FILE__);
 			if (isset($response['fault '])) {
 				$response['fault'] = $response['fault '];
@@ -437,16 +437,16 @@ class Fantastico {
 	 * )
 	 *
 	 *
-	 * @param string $ip ip address
+	 * @param string $ipAddress ip address
 	 * @param integer $type license type
 	 * @return array response array containing a faultcode and fault, or ip and id on success
 	 */
-	public function addIp($ip, $type) {
-		if (!$this->valid_ip($ip)) {
-			$response = ['faultcode' => 1, 'fault' => 'Invalid IP Address '.$ip];
+	public function addIp($ipAddress, $type) {
+		if (!$this->valid_ip($ipAddress)) {
+			$response = ['faultcode' => 1, 'fault' => 'Invalid IP Address '.$ipAddress];
 		} else {
 			$this->connect();
-			$response = json_decode($this->soapClient->addIp($this->getHash(), $ip, $type), true);
+			$response = json_decode($this->soapClient->addIp($this->getHash(), $ipAddress, $type), true);
 			myadmin_log('fantastico', 'debug', json_encode($response), __LINE__, __FILE__);
 			if (isset($response['fault '])) {
 				$response['fault'] = $response['fault '];
@@ -457,12 +457,12 @@ class Fantastico {
 		return $response;
 	}
 
-	private function soapIpFunction($function, $ip) {
-		if (!$this->valid_ip($ip)) {
-			return array('faultcode' => 1, 'fault ' => 'Invalid IP Address '.$ip);
+	private function soapIpFunction($function, $ipAddress) {
+		if (!$this->valid_ip($ipAddress)) {
+			return array('faultcode' => 1, 'fault ' => 'Invalid IP Address '.$ipAddress);
 		}
 		$this->connect();
-		$response = json_decode($this->soapClient->$function($this->getHash(), $ip), true);
+		$response = json_decode($this->soapClient->$function($this->getHash(), $ipAddress), true);
 		myadmin_log('fantastico', 'debug', json_encode($response), __LINE__, __FILE__);
 		$this->cache = array();
 		return $response;
@@ -487,11 +487,11 @@ class Fantastico {
 	 *     [fault ]=> "The IP Address that you have specified does not exist."
 	 * )
 	 *
-	 * @param mixed $ip
+	 * @param mixed $ipAddress
 	 * @return void
 	 */
-	public function deactivateIp($ip) {
-		return $this->soapIpFunction('deactivateIp', $ip);
+	public function deactivateIp($ipAddress) {
+		return $this->soapIpFunction('deactivateIp', $ipAddress);
 	}
 
 	/**
@@ -513,11 +513,11 @@ class Fantastico {
 	 *     [fault ]=> "The IP Address that you have specified does not exist."
 	 * )
 	 *
-	 * @param mixed $ip
+	 * @param mixed $ipAddress
 	 * @return void
 	 */
-	public function reactivateIp($ip) {
-		return $this->soapIpFunction('reactivateIp', $ip);
+	public function reactivateIp($ipAddress) {
+		return $this->soapIpFunction('reactivateIp', $ipAddress);
 	}
 
 	/**
@@ -540,11 +540,11 @@ class Fantastico {
 	 *     [fault ]=> "The IP Address that you have specified does not exist."
 	 * )
 	 *
-	 * @param mixed $ip
+	 * @param mixed $ipAddress
 	 * @return void
 	 */
-	public function deleteIp($ip) {
-		return $this->soapIpFunction('deleteIp', $ip);
+	public function deleteIp($ipAddress) {
+		return $this->soapIpFunction('deleteIp', $ipAddress);
 	}
 
 }
