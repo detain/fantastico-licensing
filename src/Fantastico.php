@@ -74,7 +74,7 @@ class Fantastico {
 	 */
 	public function __construct($username, $password) {
 		$this->cache = array();
-		$this->soapClient = null;
+		$this->soapClient = NULL;
 		$this->apiUsername = $username;
 		$this->apiPassword = $password;
 	}
@@ -157,10 +157,10 @@ class Fantastico {
 			return $this->cache['getIpList_'.$type];
 		}
 		if (!$this->isType($type)) {
-			return false;
+			return FALSE;
 		}
 		$this->connect();
-		$this->cache['getIpList_'.$type] = json_decode($this->soapClient->getIpList($this->getHash(), $type), true);
+		$this->cache['getIpList_'.$type] = json_decode($this->soapClient->getIpList($this->getHash(), $type), TRUE);
 		myadmin_log('fantastico', 'debug', json_encode($this->cache['getIpList_'.$type]), __LINE__, __FILE__);
 		return $this->cache['getIpList_'.$type];
 	}
@@ -208,16 +208,16 @@ class Fantastico {
 	 */
 	public function getIpListDetailed($type = self::ALL_TYPES) {
 		if (!$this->isType($type)) {
-			return false;
+			return FALSE;
 		}
 		if (isset($this->cache['getIpListDetailed_'.$type])) {
 			return $this->cache['getIpListDetailed_'.$type];
 		}
 		$this->connect();
 		//try {
-		$response = json_decode($this->soapClient->__soapCall('getIpListDetailed', array($this->getHash(), $type)), true);
+		$response = json_decode($this->soapClient->__soapCall('getIpListDetailed', array($this->getHash(), $type)), TRUE);
 		myadmin_log('fantastico', 'debug', json_encode($response), __LINE__, __FILE__);
-		//echo '<pre>';echo print_r($response, true);echo '</pre>';
+		//echo '<pre>';echo print_r($response, TRUE);echo '</pre>';
 		//$this->cache['getIpListDetailed_' . $type] = $this->cache['getIpListDetailed_' . $type]->Licenses;
 		$this->cache['getIpListDetailed_'.$type] = array();
 		$this->cache['getIpList_'.$type] = array();
@@ -254,7 +254,7 @@ class Fantastico {
 	 * @return bool whether or not the ip was validated
 	 */
 	public function valid_ip($ipAddress) {
-		return ip2long($ipAddress) !== false;
+		return ip2long($ipAddress) !== FALSE;
 	}
 
 	/**
@@ -290,7 +290,7 @@ class Fantastico {
 			return $this->cache['getIpDetails_'.$ipAddress];
 		}
 		$this->connect();
-		$this->cache['getIpDetails_'.$ipAddress] = json_decode($this->soapClient->getIpDetails($this->getHash(), $ipAddress), true);
+		$this->cache['getIpDetails_'.$ipAddress] = json_decode($this->soapClient->getIpDetails($this->getHash(), $ipAddress), TRUE);
 		myadmin_log('fantastico', 'debug', json_encode($this->cache['getIpDetails_'.$ipAddress]), __LINE__, __FILE__);
 		return $this->cache['getIpDetails_'.$ipAddress];
 	}
@@ -368,7 +368,7 @@ class Fantastico {
 			$response = ['faultcode' => 2, 'fault' => 'Invalid IP Address '.$newip];
 		} else {
 			$this->connect();
-			$response = json_decode($this->soapClient->editIp($this->getHash(), $ipAddress, $newip), true);
+			$response = json_decode($this->soapClient->editIp($this->getHash(), $ipAddress, $newip), TRUE);
 			myadmin_log('fantastico', 'debug', json_encode($response), __LINE__, __FILE__);
 			if (isset($response['fault '])) {
 				$response['fault'] = $response['fault '];
@@ -446,7 +446,7 @@ class Fantastico {
 			$response = ['faultcode' => 1, 'fault' => 'Invalid IP Address '.$ipAddress];
 		} else {
 			$this->connect();
-			$response = json_decode($this->soapClient->addIp($this->getHash(), $ipAddress, $type), true);
+			$response = json_decode($this->soapClient->addIp($this->getHash(), $ipAddress, $type), TRUE);
 			myadmin_log('fantastico', 'debug', json_encode($response), __LINE__, __FILE__);
 			if (isset($response['fault '])) {
 				$response['fault'] = $response['fault '];
@@ -462,7 +462,7 @@ class Fantastico {
 			return array('faultcode' => 1, 'fault ' => 'Invalid IP Address '.$ipAddress);
 		}
 		$this->connect();
-		$response = json_decode($this->soapClient->$function($this->getHash(), $ipAddress), true);
+		$response = json_decode($this->soapClient->$function($this->getHash(), $ipAddress), TRUE);
 		myadmin_log('fantastico', 'debug', json_encode($response), __LINE__, __FILE__);
 		$this->cache = array();
 		return $response;
