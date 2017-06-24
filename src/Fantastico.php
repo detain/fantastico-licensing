@@ -38,12 +38,12 @@ class Fantastico {
 	/**
 	 * the username to use for API access
 	 */
-	private $api_username;
+	private $apiUsername;
 
 	/**
 	 * the password to use for api access
 	 */
-	private $api_password;
+	private $apiPassword;
 
 	/**
 	 * this will hold the soap client, which hopefully we can reuse for multiple queries if need be
@@ -75,8 +75,8 @@ class Fantastico {
 	public function __construct($username, $password) {
 		$this->cache = array();
 		$this->soapClient = null;
-		$this->api_username = $username;
-		$this->api_password = $password;
+		$this->apiUsername = $username;
+		$this->apiPassword = $password;
 	}
 
 	/**
@@ -134,7 +134,7 @@ class Fantastico {
 	 * @return string the login hash
 	 */
 	private function getHash() {
-		return md5($this->api_username.$this->api_password);
+		return md5($this->apiUsername.$this->apiPassword);
 	}
 
 	/**
