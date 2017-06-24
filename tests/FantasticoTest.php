@@ -125,9 +125,9 @@ class FantasticoTest extends TestCase {
 
 	/**
 	 * @covers Detain\Fantastico\Fantastico::deactivateIp
-	 * @todo   Implement testDeactivateIp().
+	 * @todo   Implement testgetDeactivateIp().
 	 */
-	public function testDeactivateIp() {
+	public function testgetDeactivateIp() {
 		// Remove the following lines when you implement this test.
 		$this->markTestIncomplete(
 			'This test has not been implemented yet.'
