@@ -80,7 +80,7 @@ class FantasticoTest extends TestCase {
 	}
 
 	/**
-	 * @covers Detain\Fantastico\Fantastico::valid_ip
+	 * @covers Detain\Fantastico\Fantastico::validIp
 	 * @todo   Implement testValid_ip().
 	 */
 	public function testValid_ip() {

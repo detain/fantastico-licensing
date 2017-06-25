@@ -247,13 +247,13 @@ class Fantastico {
 	}
 
 	/**
-	 * Fantastico::valid_ip()
+	 * Fantastico::validIp()
 	 * validates the IP address
 	 *
 	 * @param string $ipAddress IP Address to validate
 	 * @return bool whether or not the ip was validated
 	 */
-	public function valid_ip($ipAddress) {
+	public function validIp($ipAddress) {
 		return ip2long($ipAddress) !== FALSE;
 	}
 
@@ -283,7 +283,7 @@ class Fantastico {
 	 * @return mixed returns FALSE on invalid IP, or an array of the details.
 	 */
 	public function getIpDetails($ipAddress) {
-		if (!$this->valid_ip($ipAddress)) {
+		if (!$this->validIp($ipAddress)) {
 			return array('faultcode' => 1, 'fault ' => 'Invalid IP Address '.$ipAddress);
 		}
 		if (isset($this->cache['getIpDetails_'.$ipAddress])) {
@@ -362,9 +362,9 @@ class Fantastico {
 	 * @return array returns an array of ip and newip or a fault and faultcode
 	 */
 	public function editIp($ipAddress, $newip) {
-		if (!$this->valid_ip($ipAddress)) {
+		if (!$this->validIp($ipAddress)) {
 			$response = ['faultcode' => 1, 'fault' => 'Invalid IP Address '.$ipAddress];
-		} elseif (!$this->valid_ip($newip)) {
+		} elseif (!$this->validIp($newip)) {
 			$response = ['faultcode' => 2, 'fault' => 'Invalid IP Address '.$newip];
 		} else {
 			$this->connect();
@@ -442,7 +442,7 @@ class Fantastico {
 	 * @return array response array containing a faultcode and fault, or ip and id on success
 	 */
 	public function addIp($ipAddress, $type) {
-		if (!$this->valid_ip($ipAddress)) {
+		if (!$this->validIp($ipAddress)) {
 			$response = ['faultcode' => 1, 'fault' => 'Invalid IP Address '.$ipAddress];
 		} else {
 			$this->connect();
@@ -458,7 +458,7 @@ class Fantastico {
 	}
 
 	private function soapIpFunction($function, $ipAddress) {
-		if (!$this->valid_ip($ipAddress)) {
+		if (!$this->validIp($ipAddress)) {
 			return array('faultcode' => 1, 'fault ' => 'Invalid IP Address '.$ipAddress);
 		}
 		$this->connect();
