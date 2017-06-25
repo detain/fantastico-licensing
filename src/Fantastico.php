@@ -150,7 +150,7 @@ class Fantastico {
 	 * )
 	 *
 	 * @param integer $type one of the possible fantastico license types, defaults to {@link self::ALL_TYPES}
-	 * @return false|array returns false on error or an array of license details
+	 * @return FALSE|array returns FALSE on error or an array of license details
 	 */
 	public function getIpList($type = self::ALL_TYPES) {
 		if (isset($this->cache['getIpList_'.$type])) {
@@ -204,7 +204,7 @@ class Fantastico {
 	 * 	)
 	 *
 	 * @param integer $type one of the possible fantastico license types, defaults to {@link self::ALL_TYPES}
-	 * @return false|array returns false on error or an array of license details
+	 * @return FALSE|array returns FALSE on error or an array of license details
 	 */
 	public function getIpListDetailed($type = self::ALL_TYPES) {
 		if (!$this->isType($type)) {
@@ -280,7 +280,7 @@ class Fantastico {
 	 * )
 	 *
 	 * @param string $ipAddress ip address to get details for
-	 * @return mixed returns false on invalid IP, or an array of the details.
+	 * @return mixed returns FALSE on invalid IP, or an array of the details.
 	 */
 	public function getIpDetails($ipAddress) {
 		if (!$this->valid_ip($ipAddress)) {
