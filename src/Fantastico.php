@@ -218,7 +218,7 @@ class Fantastico {
 		$response = json_decode($this->soapClient->__soapCall('getIpListDetailed', array($this->getHash(), $type)), TRUE);
 		myadmin_log('fantastico', 'debug', json_encode($response), __LINE__, __FILE__);
 		//echo '<pre>';echo print_r($response, TRUE);echo '</pre>';
-		//$this->cache['getIpListDetailed_' . $type] = $this->cache['getIpListDetailed_' . $type]->Licenses;
+		//$this->cache['getIpListDetailed_'.$type] = $this->cache['getIpListDetailed_'.$type]->Licenses;
 		$this->cache['getIpListDetailed_'.$type] = array();
 		$this->cache['getIpList_'.$type] = array();
 		foreach ($response['Licenses'] as $idx => $data) {
@@ -237,10 +237,10 @@ class Fantastico {
 		//var_dump($this->soapClient->__getLastResponse());
 		//}
 
-		//foreach ($this->cache['getIpListDetailed_' . $type] as $idx => $data)
+		//foreach ($this->cache['getIpListDetailed_'.$type] as $idx => $data)
 		//{
-		//$this->cache['getIpList_' . $type][] = $data['ipAddress'];
-		//$this->cache['getIpDetails_' . $data['ipAddress']] = $data;
+		//$this->cache['getIpList_'.$type][] = $data['ipAddress'];
+		//$this->cache['getIpDetails_'.$data['ipAddress']] = $data;
 		//}
 		//echo '<pre>';print_r($this->cache);echo '</pre>';
 		return $this->cache['getIpListDetailed_'.$type];
