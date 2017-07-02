@@ -221,7 +221,8 @@ class Fantastico {
 		//$this->cache['getIpListDetailed_'.$type] = $this->cache['getIpListDetailed_'.$type]->Licenses;
 		$this->cache['getIpListDetailed_'.$type] = array();
 		$this->cache['getIpList_'.$type] = array();
-		foreach ($response['Licenses'] as $idx => $data) {
+		$responseValues = array_values($response['Licenses']);
+		foreach ($responseValues as $data) {
 			$tdata = array(
 				'ipAddress' => $data[0],
 				'addedOn' => $data[1],
