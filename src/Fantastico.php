@@ -35,6 +35,8 @@ class Fantastico {
 	 */
 	public $wsdl = 'https://netenberg.com/api/netenberg.wsdl';
 
+	public $connected = false;
+
 	/**
 	 * the username to use for API access
 	 */
@@ -99,6 +101,7 @@ class Fantastico {
 			} catch (\Exception $e) {
 				require_once (INCLUDE_ROOT.'/../vendor/detain/nusoap/lib/nusoap.php');
 				$this->soapClient = new \nusoap_client($this->wsdl);
+				$this->connected = true;
 			}
 		}
 	}

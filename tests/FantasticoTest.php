@@ -26,24 +26,18 @@ class FantasticoTest extends TestCase {
 
 	/**
 	 * @covers Detain\Fantastico\Fantastico::connect
-	 * @todo   Implement testConnect().
 	 */
 	public function testConnect() {
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-			'This test has not been implemented yet.'
-		);
+		$this->object->connect();
+		$this->assertTrue($this->object->connected, 'test to make sure it connected ok');
 	}
 
 	/**
 	 * @covers Detain\Fantastico\Fantastico::getIpTypes
-	 * @todo   Implement testGet_ip_types().
 	 */
 	public function testGet_ip_types() {
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-			'This test has not been implemented yet.'
-		);
+		$types = $this->object->getIpTypes();
+		$this->assertTrue(is_array($types), 'returns an array of types');
 	}
 
 	/**
