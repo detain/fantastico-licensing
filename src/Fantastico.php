@@ -67,10 +67,11 @@ class Fantastico {
 	 * this holds an array of possible license types you can use and there descriptions
 	 * note the ALL_TYPES is only for listing, you cant buy one thats all_types
 	 */
-	public $types = array(
+	public $types = [
 		self::ALL_TYPES => 'All IPs',
 		self::NORMAL_TYPES => 'Normal Licenses',
-		self::VPS_TYPES => 'VPS Licenses');
+		self::VPS_TYPES => 'VPS Licenses'
+	];
 
 	/**
 	 * Starts an instance of the fantastico license API.
@@ -79,7 +80,7 @@ class Fantastico {
 	 * @param string $password password to connect to fantastico api with
 	 */
 	public function __construct($username, $password) {
-		$this->cache = array();
+		$this->cache = [];
 		$this->soapClient = NULL;
 		$this->apiUsername = $username;
 		$this->apiPassword = $password;
@@ -97,11 +98,13 @@ class Fantastico {
 			ini_set('max_execution_time', 1000);
 			ini_set('default_socket_timeout', 1000);
 			try {
-				$this->soapClient = new \SoapClient($this->wsdl, array(
+				$this->soapClient = new \SoapClient($this->wsdl, [
 					'soap_version' => SOAP_1_1,
 					'connection_timeout' => 1000,
 					'trace' => 1,
-					'exception' => 1));
+					'exception' => 1
+				]
+				);
 			} catch (\Exception $e) {
 				require_once (INCLUDE_ROOT.'/../vendor/detain/nusoap/lib/nusoap.php');
 				$this->soapClient = new \nusoap_client($this->wsdl);
@@ -222,19 +225,20 @@ class Fantastico {
 		}
 		$this->connect();
 		//try {
-		$response = json_decode($this->soapClient->__soapCall('getIpListDetailed', array($this->getHash(), $type)), TRUE);
+		$response = json_decode($this->soapClient->__soapCall('getIpListDetailed', [$this->getHash(), $type]), TRUE);
 		myadmin_log('fantastico', 'debug', json_encode($response), __LINE__, __FILE__);
 		//echo '<pre>';echo print_r($response, TRUE);echo '</pre>';
 		//$this->cache['getIpListDetailed_'.$type] = $this->cache['getIpListDetailed_'.$type]->Licenses;
-		$this->cache['getIpListDetailed_'.$type] = array();
-		$this->cache['getIpList_'.$type] = array();
+		$this->cache['getIpListDetailed_'.$type] = [];
+		$this->cache['getIpList_'.$type] = [];
 		$responseValues = array_values($response['Licenses']);
 		foreach ($responseValues as $data) {
-			$tdata = array(
+			$tdata = [
 				'ipAddress' => $data[0],
 				'addedOn' => $data[1],
 				'isVPS' => $data[2],
-				'status' => $data[3]);
+				'status' => $data[3]
+			];
 			$this->cache['getIpListDetailed_'.$type][] = $tdata;
 			$this->cache['getIpList_'.$type][] = $tdata['ipAddress'];
 			$this->cache['getIpDetails_'.$tdata['ipAddress']] = $tdata;
@@ -292,7 +296,7 @@ class Fantastico {
 	 */
 	public function getIpDetails($ipAddress) {
 		if (!$this->validIp($ipAddress)) {
-			return array('faultcode' => 1, 'fault ' => 'Invalid IP Address '.$ipAddress);
+			return ['faultcode' => 1, 'fault ' => 'Invalid IP Address '.$ipAddress];
 		}
 		if (isset($this->cache['getIpDetails_'.$ipAddress])) {
 			return $this->cache['getIpDetails_'.$ipAddress];
@@ -472,12 +476,12 @@ class Fantastico {
 	 */
 	private function soapIpFunction($function, $ipAddress) {
 		if (!$this->validIp($ipAddress)) {
-			return array('faultcode' => 1, 'fault ' => 'Invalid IP Address '.$ipAddress);
+			return ['faultcode' => 1, 'fault ' => 'Invalid IP Address '.$ipAddress];
 		}
 		$this->connect();
 		$response = json_decode($this->soapClient->$function($this->getHash(), $ipAddress), TRUE);
 		myadmin_log('fantastico', 'debug', json_encode($response), __LINE__, __FILE__);
-		$this->cache = array();
+		$this->cache = [];
 		return $response;
 	}
 
