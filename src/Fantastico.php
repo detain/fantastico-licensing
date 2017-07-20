@@ -92,7 +92,7 @@ class Fantastico {
 	 * @return void
 	 */
 	public function connect() {
-		if (is_null($this->soapClient)) {
+		if (null === $this->soapClient) {
 			ini_set('soap.wsdl_cache_enabled', '0');
 			ini_set('max_execution_time', 1000);
 			ini_set('default_socket_timeout', 1000);
