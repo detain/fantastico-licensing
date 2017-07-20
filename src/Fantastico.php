@@ -106,7 +106,7 @@ class Fantastico {
 				]
 				);
 			} catch (\Exception $e) {
-				require_once (INCLUDE_ROOT.'/../vendor/detain/nusoap/lib/nusoap.php');
+				require_once INCLUDE_ROOT.'/../vendor/detain/nusoap/lib/nusoap.php';
 				$this->soapClient = new \nusoap_client($this->wsdl);
 				$this->connected = true;
 			}
