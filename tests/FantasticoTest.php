@@ -3,6 +3,9 @@
 use Detain\Fantastico\Fantastico;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Class FantasticoTest
+ */
 class FantasticoTest extends TestCase {
 	/**
 	 * @var Fantastico

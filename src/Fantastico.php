@@ -12,7 +12,11 @@
  */
 
 namespace Detain\Fantastico;
-
+/**
+ * Class Fantastico
+ *
+ * @package Detain\Fantastico
+ */
 class Fantastico {
 
 	/**
@@ -461,6 +465,11 @@ class Fantastico {
 		return $response;
 	}
 
+	/**
+	 * @param $function
+	 * @param $ipAddress
+	 * @return array|mixed
+	 */
 	private function soapIpFunction($function, $ipAddress) {
 		if (!$this->validIp($ipAddress)) {
 			return array('faultcode' => 1, 'fault ' => 'Invalid IP Address '.$ipAddress);
