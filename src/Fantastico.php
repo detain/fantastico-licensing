@@ -93,23 +93,21 @@ class Fantastico {
 	 * @return void
 	 */
 	public function connect() {
+		$nusoap = false;
 		if (null === $this->soapClient) {
 			ini_set('soap.wsdl_cache_enabled', '0');
 			ini_set('max_execution_time', 1000);
 			ini_set('default_socket_timeout', 1000);
 			try {
-				$this->soapClient = new \SoapClient($this->wsdl, [
-					'soap_version' => SOAP_1_1,
-					'connection_timeout' => 1000,
-					'trace' => 1,
-					'exception' => 1
-				]
-				);
+				$this->soapClient = new \SoapClient($this->wsdl, ['soap_version' => SOAP_1_1, 'connection_timeout' => 1000, 'trace' => 1, 'exception' => 1]);
 			} catch (\Exception $e) {
-				require_once INCLUDE_ROOT.'/../vendor/detain/nusoap/lib/nusoap.php';
-				$this->soapClient = new \nusoap_client($this->wsdl);
-				$this->connected = true;
+				$nusoap = true;
 			}
+		}
+		if (true === $nusoap) {
+			require_once INCLUDE_ROOT.'/../vendor/detain/nusoap/lib/nusoap.php';
+			$this->soapClient = new \nusoap_client($this->wsdl);
+			$this->connected = true;
 		}
 	}
 
