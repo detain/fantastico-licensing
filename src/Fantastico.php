@@ -5,7 +5,7 @@
  * might not be needed, it just simplifies things a little more.
  *
  * @package MyAdmin
- * @author detain
+ * @author Joe Huss <detain@interserver.net>
  * @copyright 2017
  * @version $Id$
  * @access public
