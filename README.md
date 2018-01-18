@@ -71,5 +71,5 @@ $result = $fantastico->editIp('192.168.1.1', '192.168.1.2')
 
 ## License
 
-Fantastico Licensing class is licensed under the LGPL-v2 license.
+Fantastico Licensing class is licensed under the LGPL-v2.1 license.
 
