@@ -6,7 +6,7 @@
  *
  * @package MyAdmin
  * @author Joe Huss <detain@interserver.net>
- * @copyright 2017
+ * @copyright 2018
  * @version $Id$
  * @access public
  */
