@@ -13,6 +13,8 @@
 
 namespace Detain\Fantastico;
 
+require_once __DIR__.'/../../../workerman/statistics/Applications/Statistics/Clients/StatisticClient.php';
+
 /**
  * Class Fantastico
  *
