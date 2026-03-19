@@ -13,7 +13,9 @@
 
 namespace Detain\Fantastico;
 
-require_once __DIR__.'/../../../workerman/statistics/Applications/Statistics/Clients/StatisticClient.php';
+if (is_file(__DIR__.'/../../../workerman/statistics/Applications/Statistics/Clients/StatisticClient.php')) {
+    require_once __DIR__.'/../../../workerman/statistics/Applications/Statistics/Clients/StatisticClient.php';
+}
 
 /**
  * Class Fantastico
@@ -177,12 +179,18 @@ class Fantastico
             return false;
         }
         $this->connect();
-        \StatisticClient::tick('Fantastico', 'getIpList');
+        if (class_exists(\StatisticClient::class, false)) {
+            \StatisticClient::tick('Fantastico', 'getIpList');
+        }
         $this->cache['getIpList_'.$type] = json_decode($this->soapClient->getIpList($this->getHash(), $type), true);
         if ($this->cache['getIpList_'.$type] === false) {
-            \StatisticClient::report('Fantastico', 'getIpList', false, 1, 'Soap Client Error', STATISTICS_SERVER);
+            if (class_exists(\StatisticClient::class, false)) {
+                \StatisticClient::report('Fantastico', 'getIpList', false, 1, 'Soap Client Error', STATISTICS_SERVER);
+            }
         } else {
-            \StatisticClient::report('Fantastico', 'getIpList', true, 0, '', STATISTICS_SERVER);
+            if (class_exists(\StatisticClient::class, false)) {
+                \StatisticClient::report('Fantastico', 'getIpList', true, 0, '', STATISTICS_SERVER);
+            }
         }
         myadmin_log('fantastico', 'debug', json_encode($this->cache['getIpList_'.$type]), __LINE__, __FILE__);
         return $this->cache['getIpList_'.$type];
@@ -239,12 +247,18 @@ class Fantastico
         }
         $this->connect();
         //try {
-        \StatisticClient::tick('Fantastico', 'getIpListDetailed');
+        if (class_exists(\StatisticClient::class, false)) {
+            \StatisticClient::tick('Fantastico', 'getIpListDetailed');
+        }
         $response = json_decode($this->soapClient->__soapCall('getIpListDetailed', [$this->getHash(), $type]), true);
         if ($response === false) {
-            \StatisticClient::report('Fantastico', 'getIpListDetailed', false, 1, 'Soap Client Error', STATISTICS_SERVER);
+            if (class_exists(\StatisticClient::class, false)) {
+                \StatisticClient::report('Fantastico', 'getIpListDetailed', false, 1, 'Soap Client Error', STATISTICS_SERVER);
+            }
         } else {
-            \StatisticClient::report('Fantastico', 'getIpListDetailed', true, 0, '', STATISTICS_SERVER);
+            if (class_exists(\StatisticClient::class, false)) {
+                \StatisticClient::report('Fantastico', 'getIpListDetailed', true, 0, '', STATISTICS_SERVER);
+            }
         }
         myadmin_log('fantastico', 'debug', json_encode($response), __LINE__, __FILE__);
         //echo '<pre>';echo print_r($response, TRUE);echo '</pre>';
@@ -324,12 +338,18 @@ class Fantastico
             return $this->cache['getIpDetails_'.$ipAddress];
         }
         $this->connect();
-        \StatisticClient::tick('Fantastico', 'getIpDetails');
+        if (class_exists(\StatisticClient::class, false)) {
+            \StatisticClient::tick('Fantastico', 'getIpDetails');
+        }
         $this->cache['getIpDetails_'.$ipAddress] = json_decode($this->soapClient->getIpDetails($this->getHash(), $ipAddress), true);
         if ($this->cache['getIpDetails_'.$ipAddress] === false) {
-            \StatisticClient::report('Fantastico', 'getIpDetails', false, 1, 'Soap Client Error', STATISTICS_SERVER);
+            if (class_exists(\StatisticClient::class, false)) {
+                \StatisticClient::report('Fantastico', 'getIpDetails', false, 1, 'Soap Client Error', STATISTICS_SERVER);
+            }
         } else {
-            \StatisticClient::report('Fantastico', 'getIpDetails', true, 0, '', STATISTICS_SERVER);
+            if (class_exists(\StatisticClient::class, false)) {
+                \StatisticClient::report('Fantastico', 'getIpDetails', true, 0, '', STATISTICS_SERVER);
+            }
         }
         myadmin_log('fantastico', 'debug', json_encode($this->cache['getIpDetails_'.$ipAddress]), __LINE__, __FILE__);
         return $this->cache['getIpDetails_'.$ipAddress];
@@ -409,12 +429,18 @@ class Fantastico
             $response = ['faultcode' => 2, 'fault' => 'Invalid IP Address '.$newip];
         } else {
             $this->connect();
-            \StatisticClient::tick('Fantastico', 'editIp');
+            if (class_exists(\StatisticClient::class, false)) {
+                \StatisticClient::tick('Fantastico', 'editIp');
+            }
             $response = json_decode($this->soapClient->editIp($this->getHash(), $ipAddress, $newip), true);
             if ($response === false) {
-                \StatisticClient::report('Fantastico', 'editIp', false, 1, 'Soap Client Error', STATISTICS_SERVER);
+                if (class_exists(\StatisticClient::class, false)) {
+                    \StatisticClient::report('Fantastico', 'editIp', false, 1, 'Soap Client Error', STATISTICS_SERVER);
+                }
             } else {
-                \StatisticClient::report('Fantastico', 'editIp', true, 0, '', STATISTICS_SERVER);
+                if (class_exists(\StatisticClient::class, false)) {
+                    \StatisticClient::report('Fantastico', 'editIp', true, 0, '', STATISTICS_SERVER);
+                }
             }
             myadmin_log('fantastico', 'debug', json_encode($response), __LINE__, __FILE__);
             if (isset($response['fault '])) {
@@ -494,12 +520,18 @@ class Fantastico
             $response = ['faultcode' => 1, 'fault' => 'Invalid IP Address '.$ipAddress];
         } else {
             $this->connect();
-            \StatisticClient::tick('Fantastico', 'addIp');
+            if (class_exists(\StatisticClient::class, false)) {
+                \StatisticClient::tick('Fantastico', 'addIp');
+            }
             $response = json_decode($this->soapClient->addIp($this->getHash(), $ipAddress, $type), true);
             if ($response === false) {
-                \StatisticClient::report('Fantastico', 'addIp', false, 1, 'Soap Client Error', STATISTICS_SERVER);
+                if (class_exists(\StatisticClient::class, false)) {
+                    \StatisticClient::report('Fantastico', 'addIp', false, 1, 'Soap Client Error', STATISTICS_SERVER);
+                }
             } else {
-                \StatisticClient::report('Fantastico', 'addIp', true, 0, '', STATISTICS_SERVER);
+                if (class_exists(\StatisticClient::class, false)) {
+                    \StatisticClient::report('Fantastico', 'addIp', true, 0, '', STATISTICS_SERVER);
+                }
             }
             myadmin_log('fantastico', 'debug', json_encode($response), __LINE__, __FILE__);
             if (isset($response['fault '])) {
@@ -522,12 +554,18 @@ class Fantastico
             return ['faultcode' => 1, 'fault ' => 'Invalid IP Address '.$ipAddress];
         }
         $this->connect();
-        \StatisticClient::tick('Fantastico', $function);
+        if (class_exists(\StatisticClient::class, false)) {
+            \StatisticClient::tick('Fantastico', $function);
+        }
         $response = json_decode($this->soapClient->$function($this->getHash(), $ipAddress), true);
         if ($response === false) {
-            \StatisticClient::report('Fantastico', $function, false, 1, 'Soap Client Error', STATISTICS_SERVER);
+            if (class_exists(\StatisticClient::class, false)) {
+                \StatisticClient::report('Fantastico', $function, false, 1, 'Soap Client Error', STATISTICS_SERVER);
+            }
         } else {
-            \StatisticClient::report('Fantastico', $function, true, 0, '', STATISTICS_SERVER);
+            if (class_exists(\StatisticClient::class, false)) {
+                \StatisticClient::report('Fantastico', $function, true, 0, '', STATISTICS_SERVER);
+            }
         }
         myadmin_log('fantastico', 'debug', json_encode($response), __LINE__, __FILE__);
         $this->cache = [];
