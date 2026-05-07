@@ -4,8 +4,23 @@
 	"description": "Fantastico Licensing Class",
 	"keywords": [
 		"fantastico",
-		"administration",
-		"license"
+		"autoscript",
+		"license",
+		"software-license",
+		"software-licensing",
+		"license-management",
+		"licensing",
+		"api",
+		"automation",
+		"billing",
+		"cpanel",
+		"hosting",
+		"provisioning",
+		"reseller",
+		"saas",
+		"subscription",
+		"whmcs",
+		"administration"
 	],
 	"license": "LGPL-2.1-only",
 	"authors": [
